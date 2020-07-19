@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_flutter/widgets/tasks_list.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
@@ -33,10 +34,12 @@ class AddTaskScreen extends StatelessWidget {
             ),
             FlatButton(
               onPressed: () {},
-              child: Text('Add',
-                  style: TextStyle(
-                    color: Colors.white,
-                  )),
+              child: Text(
+                'Add',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               color: Colors.lightBlueAccent,
             ),
           ],
