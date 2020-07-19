@@ -20,6 +20,7 @@ class _TaskTileState extends State<TaskTile> {
         toggleCheckboxState: (bool checkboxState) {
           setState(() {
             isChecked = checkboxState;
+            print(isChecked);
           });
         },
       ),
