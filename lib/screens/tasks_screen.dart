@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_flutter/widgets/tasks_list.dart';
 import 'package:todoey_flutter/screens/add_task_screen.dart';
+import 'package:todoey_flutter/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   // Widget buildBottomSheet(BuildContext context) => Container();
 
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy eggs'),
+    Task(name: 'Buy bread'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +32,15 @@ class TasksScreen extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen(),
+                child: AddTaskScreen(
+                  (newTaskTitle) {
+                    setState(() {
+                      // flatButton을 누르면 setState가 감지하도록.
+                      tasks.add(Task(name: newTaskTitle));
+                    });
+                    Navigator.pop(context); // button 누르면 그전 화면으로 돌아가게
+                  },
+                ),
               ),
             ),
           );
@@ -56,7 +75,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -83,7 +102,7 @@ class TasksScreen extends StatelessWidget {
               //     TasksList(),
               //   ],
               // ),
-              child: TasksList(),
+              child: TasksList(tasks),
             ),
           ),
         ],
